@@ -1,0 +1,10 @@
+{
+    "python.pythonPath": "tutorial-env\\Scripts\\python.exe",
+    "DockerRun.DisableDockerrc": true,
+    "cSpell.words": [
+        "jsonify"
+    ],
+    "gitlens.autolinks": [
+        
+    ]
+}
