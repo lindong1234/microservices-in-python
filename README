@@ -1,4 +1,4 @@
-# microservices-in-python
+idiii((ii# microservices-in-python
 microservices-in-python
 - Installing Python 3.X
 - Creating Python Virtual Environments "python -m venv tutorial-env"
@@ -12,9 +12,62 @@ microservices-in-python
 - Using Pip to Freeze Python Dependencies
     pip freeze > requirements.txt
 
+    to install the virtual env in another place: pip install -r requirements.txt
+
+
     start minimkube
-        sudo minikube start
+        Start CMD Shell
+>>>        start docker by clicking icon
+>>>        Load up ./tutorial-env/Scripts/activate.bat
+>>>        sudo minikube start
+
+        "
+>>>        (tutorial-env) C:\Users\ddlin\project\microservices-in-python>minikube docker-env
+>>>        SET DOCKER_TLS_VERIFY=1SET DOCKER_HOST=tcp://172.25.207.195:2376
+>>>        SET DOCKER_CERT_PATH=C:\Users\ddlin\.minikube\certs
+>>>        SET MINIKUBE_ACTIVE_DOCKERD=minikube
+        REM To point your shell to minikube's docker-daemon, run:
+        REM @FOR /f "tokens=*" %i IN ('minikube -p minikube docker-env --shell cmd') DO @%i
+        "
+        "minikube start" didn't work until:
+            $ docker system prune
+            $ minikube delete
+            //$ minikube start --container-runtime=containerd
+            (delete ./kube/config and regen by "New-Item config -type file")
+            minikube start
+
 - Building the docker image using Dockerfile
+>>>        docker build . -t webapp:1.0
+            docker scan .
+>>>        docker run -d -p 80:5000 --name web webapp:1.0
+
+
 - Writing Docker Compose file
+
+    C:\Users\ddlin\.docker\contexts\meta\fe9c6bd7a66301f49ca9b6a70b217107cd1284598bfc254700c989b916da791e> move .\meta.json .\meta.json.bak
+>>>    docker-compose build
+        docker-compose up -d
+    //deployed webapp2.0 to docker
+
 - Writing Kubernetes Manifest files for the application
-- Creating Helm Chart
+>>>    minikube start
+>>>    minikube ip //192.168.68.115
+>>>    docker-compose down
+
+>>>    kubectl apply -f .\deployment.yml
+>>>        deployment.apps/python-webapp created
+>>>    kubectl apply -f .\service.yml
+>>>        service/web-service created
+>>>    kubectl get po,svc
+
+        (tutorial-env) C:\Users\ddlin\project\microservices-in-python# kubectl get po,svc
+        NAME                                READY   STATUS        RESTARTS        AGE
+        pod/python-webapp-964697558-hkrxg   1/1     Running       0               24s
+        pod/python-webapp-964697558-lc44p   1/1     Running       1 (2m16s ago)   4d1h
+        pod/python-webapp-cd7b69447-8f79f   1/1     Terminating   8 (2m16s ago)   4d1h
+
+        NAME                  TYPE        CLUSTER-IP     EXTERNAL-IP   PORT(S)        AGE
+        service/kubernetes    ClusterIP   10.96.0.1      <none>        443/TCP        4d4h
+        service/web-service   NodePort    10.98.140.10   <none>        80:31486/TCP   4d1h
+
+>>>    http://192.168.68.115/details

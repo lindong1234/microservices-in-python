@@ -1,2 +1,5 @@
 tutorial-env
 __pycache__
+kubeadm.exe
+kubectl.exe
+$PROFILE

@@ -32,5 +32,5 @@ def details():
 
 # The if __name__ == '__main__' line allows your flask application to be run both standalone, and as part of another application
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=500)  # Start the flask application on IP 0.0.0.0 and port 500
+    app.run(host='0.0.0.0', port=5000)  # Start the flask application on IP 0.0.0.0 and port 500
 
